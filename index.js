@@ -10,7 +10,9 @@ var lec = require('line-ending-corrector').LineEndingCorrector,
 		ext: [
 			'cnf', 'conf', 'config', 'css', 'haml', 'htaccess', 'htm', 'html', 'jade', 'js', 'json', 'log',
 			'markdown', 'md', 'mustache', 'php', 'pug', 'scss', 'tpl', 'ts', 'txt', 'xhtml', 'xml', 'yml'
-		]
+		],
+		excludeNonMatches: false,
+		includeMatches: false,
 	},
 	PLUGIN_NAME = 'ConditionalEOL',
 	CONSOLE_PREFIX = PLUGIN_NAME + ': ';
@@ -36,8 +38,13 @@ module.exports = function (opt, appendExt) {
 
 		// If null or file extension does not match
 		if (file.isNull() || !opt.ext.includes(ext)) {
-			if (!file.isNull() && typeof opt === 'object' && 'verbose' in opt && opt.verbose === true) {
-				console.log(CONSOLE_PREFIX + file.path + ' - file extension does not match');
+			if (!file.isNull() && typeof opt === 'object') {
+				if ('verbose' in opt && opt.verbose === true) {
+					console.log(CONSOLE_PREFIX + file.path + ' - file extension does not match');
+				}
+				if ('excludeNonMatches' in opt && opt.excludeNonMatches === true) {
+					return callback(null);
+				}
 			}
 			return callback(null, file);
 		}
@@ -61,10 +68,14 @@ module.exports = function (opt, appendExt) {
 				file.contents = new Buffer(output);
 				this.push(file);
 			} else {
-				if (typeof opt === 'object' && 'verbose' in opt && opt.verbose === true) {
-					console.log(CONSOLE_PREFIX + file.path + ' - already is ' + opt.lineSeparator);
+				if (typeof opt === 'object') {
+					if ('verbose' in opt && opt.verbose === true) {
+						console.log(CONSOLE_PREFIX + file.path + ' - already is ' + opt.lineSeparator);
+					}
+					if ('includeMatches' in opt && opt.includeMatches === true) {
+						this.push(file);
+					}
 				}
-
 			}
 		} catch (err) {
 			return callback(err);

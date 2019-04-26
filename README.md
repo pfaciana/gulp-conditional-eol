@@ -30,7 +30,9 @@ with all options
 	verbose: 'min', 
 	lineSeparator: 'LF', 
 	fileEncoding: 'utf8', 
-	ext: ['scss','css','js']
+	ext: ['scss','css','js'],
+	excludeNonMatches: true,
+	includeMatches: false,
 }, ['additionalExt1','additionalExt2']))
 ```
 
@@ -51,6 +53,12 @@ Default [
 'cnf', 'conf', 'config', 'css', 'haml', 'htaccess', 'htm', 'html', 'jade', 'js', 'json', 'log',
 'markdown', 'md', 'mustache', 'php', 'pug', 'scss', 'tpl', 'ts', 'txt', 'xhtml', 'xml', 'yml'
 ]
+
+`excludeNonMatches`
+Prevents files with extensions that are not matched in `ext` option to be passed through the pipe. Defaults to 'false'  
+
+`includeMatches`
+Allow files with extensions that are matched in `ext` option to be passed through the pipe when they already have the correct line endings. Defaults to 'false'  
 
 ## Second Parameter: appendExt (string or array)
 
