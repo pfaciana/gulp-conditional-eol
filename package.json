@@ -1,7 +1,7 @@
 {
 	"name": "gulp-conditional-eol",
 	"version": "1.1.0",
-	"description": "Gulp Plugin for Line Ending Corrector (A utility that makes sure your files have consistent line endings)",
+	"description": "A gulp plugin to make line endings consistent across files in a project. ",
 	"main": "index.js",
 	"repository": {
 		"type": "git",
