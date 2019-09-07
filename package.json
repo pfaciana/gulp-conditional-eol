@@ -1,6 +1,6 @@
 {
 	"name": "gulp-conditional-eol",
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"description": "A gulp plugin to make line endings consistent across files in a project. ",
 	"main": "index.js",
 	"repository": {
@@ -26,7 +26,6 @@
 		"line-ending-corrector": "^1",
 		"through2": "^2"
 	},
-	"devDependencies": {
-	},
+	"devDependencies": {},
 	"private": false
 }
